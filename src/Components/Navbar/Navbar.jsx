@@ -21,7 +21,6 @@ class Navbar extends React.Component {
           </button>
           <div className="collapse navbar-collapse" id="navbarText">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              
               <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle"
@@ -36,12 +35,12 @@ class Navbar extends React.Component {
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li>
                     <a className="dropdown-item" href="#">
-                      Standerd Room
+                      Standard Room
                     </a>
                   </li>
                   <li>
                     <a className="dropdown-item" href="#">
-                      Duplex Room
+                      Deluxe Room
                     </a>
                   </li>
                   <li>
