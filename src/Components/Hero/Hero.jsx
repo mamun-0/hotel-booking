@@ -1,5 +1,5 @@
 import "./Hero.css";
-const Hero = () => {
+const Hero = (props) => {
   return (
     <>
       <div className="hero-section">
