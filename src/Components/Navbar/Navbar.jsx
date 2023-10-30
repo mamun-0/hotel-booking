@@ -1,13 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Navbar.css";
 class Navbar extends React.Component {
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <Link className="navbar-brand" to="/">
             Hotel-Booking.com
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -22,45 +23,45 @@ class Navbar extends React.Component {
           <div className="collapse navbar-collapse" id="navbarText">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item dropdown">
-                <a
+                <Link
                   className="nav-link dropdown-toggle"
-                  href="#"
+                  to="#"
                   id="navbarDropdown"
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
                   Choose Room
-                </a>
+                </Link>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <Link className="dropdown-item" to="/standard">
                       Standard Room
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <Link className="dropdown-item" to="/deluxe">
                       Deluxe Room
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <Link className="dropdown-item" to="/executive">
                       Exclusive Suite
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </li>
             </ul>
             <ul className="navbar-nav ">
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <Link className="nav-link" to="/signin">
                   Sign in
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <Link className="nav-link" to="/register">
                   Register
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
