@@ -1,10 +1,55 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
+import { connect } from "react-redux";
 class Navbar extends React.Component {
+  userEmail() {
+    try {
+      if (this.props.storeSignIn) {
+        return this.props.storeSignIn.email;
+      } else if (this.props.storeSignUp) {
+        return this.props.storeSignUp.email;
+      } else {
+        return null;
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+  badgeUI() {
+    if (
+      ["/standard", "/executive", "/deluxe"].includes(window.location.pathname)
+    ) {
+      return (
+        <button
+          type="button"
+          className="btn btn-sm btn-primary position-relative mx-2"
+        >
+          {`Available ${window.location.pathname.slice(1)} Room`}
+          <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {this.props.remainingRoom}
+            <span className="visually-hidden">unread messages</span>
+          </span>
+        </button>
+      );
+    } else {
+      return null;
+    }
+  }
   render() {
+    const signOutUI = (
+      <div className="d-flex justify-content-center align-items-center mx-3">
+        <em className="text-white">{this.userEmail()}</em>
+        <li className="nav-item">
+          <a className="nav-link" href="/">
+            SignOut
+          </a>
+        </li>
+      </div>
+    );
+
     return (
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark ">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
             Hotel-Booking.com
@@ -52,17 +97,26 @@ class Navbar extends React.Component {
                 </ul>
               </li>
             </ul>
-            <ul className="navbar-nav ">
+            <ul className="navbar-nav d-flex justify-content-center align-items-center ">
               <li className="nav-item">
-                <Link className="nav-link" to="/signin">
-                  Sign in
-                </Link>
+                <b className="text-white">{this.badgeUI()}</b>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/register">
-                  Register
-                </Link>
-              </li>
+              {this.props.storeSignIn || this.props.storeSignUp ? (
+                signOutUI
+              ) : (
+                <>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/login">
+                      Login
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/signup">
+                      Sign Up
+                    </Link>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>
@@ -70,4 +124,7 @@ class Navbar extends React.Component {
     );
   }
 }
-export default Navbar;
+const mapStateToProps = (state) => {
+  return state;
+};
+export default connect(mapStateToProps)(Navbar);

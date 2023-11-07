@@ -1,4 +1,5 @@
 import "./Hero.css";
+import { Link } from "react-router-dom";
 const Hero = (props) => {
   return (
     <>
@@ -6,9 +7,9 @@ const Hero = (props) => {
         <div className="hero-content">
           <h1>We provide all class room with free breakfast </h1>
           <p>What are you waiting for!</p>
-          <a className="btn btn-warning p-2" href="#">
+          <Link className="btn btn-warning p-2" to="/login">
             Get Started
-          </a>
+          </Link>
         </div>
       </div>
     </>
