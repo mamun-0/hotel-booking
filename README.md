@@ -11,7 +11,7 @@
 
 ## Running photo-gallery
 
-1. Clone the [repo](https://github.com/mamun-0/photo-gallery.git)
+1. Clone the [repo](https://github.com/mamun-0/hotel-booking.git)
 2. Open 💻 terminal at the cloned location and type `npm install`
 3. Then type `npm start`
 
