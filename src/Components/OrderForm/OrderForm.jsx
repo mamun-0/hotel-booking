@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import { Form, FormGroup, Label, Input } from "reactstrap";
 class OrderForm extends React.Component {
@@ -6,24 +7,64 @@ class OrderForm extends React.Component {
     this.state = {
       name: "",
       mobile: "",
+      placeOrder: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault();
-    console.log("Submission :", this.state);
+    const { description, features, url, price } = this.props;
+    const resObject = {
+      description,
+      features,
+      url,
+      price,
+      isBooked: true,
+      owner: { name: this.state.name, mobile: this.state.mobile },
+    };
+    await axios.put(
+      `http://localhost:3001${window.location.pathname}/${this.props.id}`,
+      resObject
+    );
+
     this.setState({
       name: "",
       mobile: "",
     });
+    this.props.bookingRender();
     this.props.toggle();
   }
+  phoneValidity(mobileNum) {
+    const phoneNumberRegEx = /^(\+?880|0)1[345678]\d{8}$/;
+    return phoneNumberRegEx.test(mobileNum);
+  }
   handleChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
+    this.setState(
+      {
+        [e.target.name]: e.target.value,
+      },
+      () => {
+        const isValidPhone = this.phoneValidity(this.state.mobile);
+        if (isValidPhone && this.state.name) {
+          this.setState({ placeOrder: true });
+        } else {
+          this.setState({ placeOrder: false });
+        }
+      }
+    );
+  }
+  bookButtonUI() {
+    if (!this.state.placeOrder) {
+      return (
+        <button className="btn btn-success" disabled>
+          Book now!☺
+        </button>
+      );
+    } else {
+      return <button className="btn btn-success">Book now!☺</button>;
+    }
   }
   render() {
     return (
@@ -53,7 +94,7 @@ class OrderForm extends React.Component {
             required
           />
         </FormGroup>
-        <button className="btn btn-success">Book!☺</button>
+        {this.bookButtonUI()}
       </Form>
     );
   }

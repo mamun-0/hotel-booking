@@ -7,6 +7,14 @@ function Popup(props) {
 
   const toggle = () => setModal(!modal);
 
+  const ownerInfoUI = () => {
+    const { isBooked } = props;
+    if (isBooked) {
+      return null;
+    } else {
+      return <OrderForm toggle={toggle} {...props} />;
+    }
+  };
   return (
     <div>
       <Button color="primary" onClick={toggle}>
@@ -31,7 +39,13 @@ function Popup(props) {
             <b>Price : </b>&#2547;{props.price}/night
           </p>
         </ModalBody>
-        <OrderForm toggle={toggle} />
+        {props.owner.name || props.owner.mobile ? (
+          <div className="m-2 p-2 border border-primary">
+            <p className="lead">Name : {props.owner.name}</p>
+            <p className="lead">Mobile : {props.owner.mobile}</p>
+          </div>
+        ) : null}
+        {ownerInfoUI()}
       </Modal>
     </div>
   );

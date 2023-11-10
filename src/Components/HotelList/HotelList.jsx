@@ -10,6 +10,13 @@ class HotelList extends React.Component {
     this.state = {
       data: null,
     };
+    this.bookingRender = this.bookingRender.bind(this);
+  }
+  async bookingRender() {
+    const { path } = this.props.match;
+    const url = `http://localhost:3001${path}`;
+    const { data } = await axios.get(url);
+    this.setState({ data });
   }
   async componentDidMount() {
     const { path } = this.props.match;
@@ -30,7 +37,9 @@ class HotelList extends React.Component {
     let hotel = null;
     if (this.state.data) {
       hotel = this.state.data.map((hotel) => {
-        return <Hotel key={uuidv4()} {...hotel} />;
+        return (
+          <Hotel key={uuidv4()} {...hotel} bookingRender={this.bookingRender} />
+        );
       });
     }
     return (
