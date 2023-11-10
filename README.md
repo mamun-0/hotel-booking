@@ -9,9 +9,9 @@
 5. Now you can see this type of success message
    ![Imgur](https://i.imgur.com/MXrFmLA.png)
 
-## Running photo-gallery
+## Running hotel-booking
 
-1. Clone the [repo](https://github.com/mamun-0/photo-gallery.git)
+1. Clone the [repo](https://github.com/mamun-0/hotel-booking.git)
 2. Open 💻 terminal at the cloned location and type `npm install`
 3. Then type `npm start`
 
