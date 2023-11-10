@@ -1,5 +1,5 @@
 import { BrowserRouter, Route } from "react-router-dom";
-import Hero from "./Components/Hero/Hero";
+import Home from "./Components/Pages/Home/Home";
 import Navbar from "./Components/Navbar/Navbar";
 import Standard from "./Components/Pages/Standard/Standard";
 import Executive from "./Components/Pages/Executive/Executive";
@@ -11,7 +11,7 @@ function App() {
     <>
       <BrowserRouter>
         <Navbar />
-        <Route exact path="/" component={Hero} />
+        <Route exact path="/" component={Home} />
         <Route exact path="/standard" component={Standard} />
         <Route exact path="/executive" component={Executive} />
         <Route exact path="/deluxe" component={Deluxe} />
