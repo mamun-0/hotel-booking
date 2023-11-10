@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
 import OrderForm from "../OrderForm/OrderForm";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 function Popup(props) {
   const [modal, setModal] = useState(false);
@@ -13,6 +15,15 @@ function Popup(props) {
       return null;
     } else {
       return <OrderForm toggle={toggle} {...props} />;
+    }
+  };
+  const isLoggedIn = () => {
+    if (props.storeSignIn) {
+      return props.storeSignIn;
+    } else if (props.storeSignUp) {
+      return props.storeSignUp;
+    } else {
+      return null;
     }
   };
   return (
@@ -41,14 +52,22 @@ function Popup(props) {
         </ModalBody>
         {props.owner.name || props.owner.mobile ? (
           <div className="m-2 p-2 border border-primary">
-            <p className="lead">Name : {props.owner.name}</p>
+            <p className="lead">Booked by : {props.owner.name}</p>
             <p className="lead">Mobile : {props.owner.mobile}</p>
           </div>
         ) : null}
-        {ownerInfoUI()}
+        {isLoggedIn() ? (
+          ownerInfoUI()
+        ) : (
+          <Link className="btn btn-lg btn-danger"  to="/login">
+            Please Login
+          </Link>
+        )}
       </Modal>
     </div>
   );
 }
-
-export default Popup;
+const mapStateToProps = (state) => {
+  return state;
+};
+export default connect(mapStateToProps)(Popup);

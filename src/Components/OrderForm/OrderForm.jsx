@@ -1,5 +1,6 @@
 import axios from "axios";
 import React from "react";
+import { connect } from "react-redux";
 import { Form, FormGroup, Label, Input } from "reactstrap";
 class OrderForm extends React.Component {
   constructor(props) {
@@ -8,6 +9,7 @@ class OrderForm extends React.Component {
       name: "",
       mobile: "",
       placeOrder: false,
+      auth: null,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -66,6 +68,20 @@ class OrderForm extends React.Component {
       return <button className="btn btn-success">Book now!☺</button>;
     }
   }
+  isLoggedIn() {
+    if (this.props.storeSignIn) {
+      return this.props.storeSignIn;
+    } else if (this.props.storeSignUp) {
+      return this.props.storeSignUp;
+    } else {
+      return null;
+    }
+  }
+  componentDidMount() {
+    this.setState({
+      auth: this.isLoggedIn(),
+    });
+  }
   render() {
     return (
       <Form onSubmit={this.handleSubmit} className="p-3">
@@ -99,4 +115,7 @@ class OrderForm extends React.Component {
     );
   }
 }
-export default OrderForm;
+const mapStateToProps = (state) => {
+  return state;
+};
+export default connect(mapStateToProps)(OrderForm);
